@@ -11,11 +11,12 @@
   "type": "commonjs",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",  
-    "start": "node src/App.js", 
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node src/App.js",
     "dev": "nodemon src/App.js"
   },
   "dependencies": {
-    "express": "^5.2.1"
+    "express": "^5.2.1",
+    "mongoose": "^9.6.2"
   }
 }
