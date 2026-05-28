@@ -1,17 +1,31 @@
 const express = require("express");
 const connectDb = require("./config/database");
 const User = require("./models/user");
+const bcrypt = require("bcrypt");
 const app = express();
 const { validateSignupData } = require("./utils/validation");
-// app.use(express.json());
+app.use(express.json());
 
 app.post("/signup", async (req, res) => {
   // step-> Validate the data
   try {
+    const { firstName, lastName, email, password, age, gender, about, skills } =
+      req.body;
     validateSignupData(req);
     // step-> Encrypt the password
+    const passwordHash = await bcrypt.hash(password, 10);
+
     // step-> creating a new instance of user modle
-    const user = new User(req.body);
+    const user = new User({
+      firstName,
+      lastName,
+      email,
+      password: passwordHash,
+      age,
+      gender,
+
+      skills,
+    });
 
     await user.save();
     res.send("user creaded successfully");
@@ -57,11 +71,28 @@ app.put("/feed", async (req, res) => {
 //     res.status(400).send("Error creating user");
 //   }
 // });
+app.post("/login", async (req, res) => {
+  try {
+    const { email, password } = req.body;
+
+    const isEmailPresent = await User.findOne({ email: email });
+    if (!isEmailPresent) {
+      throw new Error("Email is not present in the database");
+    }
+    const isPasswordValid = await bcrypt.compare(password, user.password);
+    if (!isPasswordValid) {
+       throw new Error("Invalid password");
+    }
+   res.send("Login successful");
+  } catch (err) {
+    res.status(400).send("ERROR: " + err.message);
+  }
+});
 
 connectDb()
   .then(() => {
     console.log("Database is connected succesfully");
-    app.listen(4000, () => {
+    app.listen(7777, () => {
       console.log("server is running on port 7777");
     });
   })
