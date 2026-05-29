@@ -1,0 +1,30 @@
+$kind: http-request
+url: http://localhost:4000/profile
+method: PUT
+body:
+  type: json
+  content: "{\r
+
+    \  \"firstName\": \"Aman\",\r
+
+    \  \"lastName\": \"Verma\",\r
+
+    \  \"email\": \"aman.verma@gmail.com\",\r
+
+    \  \"password\": \"Aman@123\",\r
+
+    \  \"gender\": \"male\",\r
+
+    \  \"age\": 22,\r
+
+    \  \"imgURL\":
+    \"https://images.unsplash.com/photo-1506794778202-cad84cf45f1d\",\r
+
+    \  \"about\": \"I am a BTech student interested in web development.\",\r
+
+    \  \"skills\": [\"C++\", \"JavaScript\", \"React\", \"Node.js\",
+    \"MongoDB\"]\r
+
+    }"
+examples: .resources/login.resources/examples
+order: 5000
