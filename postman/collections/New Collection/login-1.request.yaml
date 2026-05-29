@@ -1,0 +1,8 @@
+$kind: http-request
+name: login
+url: http://localhost:4000/login
+method: POST
+body:
+  type: json
+  content: ""
+order: 3000
